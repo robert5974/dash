@@ -72,6 +72,7 @@ class Session {
 
            private:
             QList<QuickView *> quick_views_;
+			
         };
 
         double scale;
@@ -145,6 +146,7 @@ class Session {
         QFont font(int size, bool mono = false) const;
         QWidget *brightness_slider(bool buttons = true) const;
         QWidget *volume_slider(bool buttons = true) const;
+		QWidget *equalizer_slider(bool buttons = true) const;
 
        private:
         Arbiter &arbiter_;
