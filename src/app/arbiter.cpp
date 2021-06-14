@@ -157,7 +157,7 @@ void Arbiter::increase_volume(uint8_t val)
 {
     this->set_volume(std::min(std::max(0, this->system().volume + val), 100));
 }
-### Set Preset from list
+
 void Arbiter::set_preset(uint8_t preset)
 {
     this->system().preset = preset;
