@@ -18,6 +18,7 @@
 #include "app/pages/media.hpp"
 #include "app/pages/settings.hpp"
 #include "app/quick_views/combo.hpp"
+#include "app/quick_views/equalizer.hpp"
 #include "plugins/brightness_plugin.hpp"
 
 #include "app/session.hpp"
@@ -135,7 +136,8 @@ Session::Layout::ControlBar::ControlBar(QSettings &settings, Arbiter &arbiter)
         new NullQuickView(arbiter),
         new VolumeQuickView(arbiter),
         new BrightnessQuickView(arbiter),
-        new ComboQuickView(arbiter)
+        new ComboQuickView(arbiter),
+		new EqualizerQuickView(arbiter)
     };
 
     this->curr_quick_view = this->quick_views_.value(settings.value("Layout/ControlBar/quick_view", 0).toInt());
