@@ -33,7 +33,7 @@ void EqualizerQuickView::init()
         else
             equalizer_dialog->open(2000);
 	
-	});
+	/*});
     auto band1_value = new QLabel(QString::number(this->arbiter.system().band1));
     band1_value->setFont(this->arbiter.forge().font(10));
     connect(&this->arbiter, &Arbiter::band1_changed, [band1_value](uint8_t band1){
@@ -70,12 +70,12 @@ void EqualizerQuickView::init()
    # dark_mode->setFlat(true);
     #this->arbiter.forge().iconize("dark_mode", dark_mode, 26);
     #connect(dark_mode, &QPushButton::clicked, [this]{ this->arbiter.toggle_mode(); });
-
+*/
     layout->addWidget(equalizer, 1);
     layout->addWidget(equalizer_value, 7);
-    #layout->addStretch();
+    /*#layout->addStretch();
     #layout->addWidget(brightness, 1);
     #layout->addWidget(brightness_value, 7);
     #layout->addStretch();
-    #layout->addWidget(dark_mode, 1);
+    #layout->addWidget(dark_mode, 1);*/
 }
