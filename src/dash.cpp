@@ -1,9 +1,30 @@
 #include <QApplication>
 #include <QStringList>
+#include <QProcess>
 #include <QWindow>
 
 #include "app/window.hpp"
+// Support for Rotary Encoder (KY-040)
+void monitor-volume(){
+	// instantiate dynamically to avoid stack unwinding before the process terminates
+    QProcess* process = new QProcess(); 
 
+    // catch data output
+    QObject::connect(process, &QProcess::readyRead, [process] () {
+        QByteArray a = process->readAll();
+        qDebug() <<  a;
+    });
+
+    // delete process instance when done, and get the exit status to handle errors.
+    QObject::connect(process, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+                     [=](int exitCode, QProcess::ExitStatus /*exitStatus*/){
+        qDebug()<< "process exited with code " << exitCode;
+        process->deleteLater();
+    });
+
+    // start the process after making signal/slots connections 
+    process->start("python3 monitor-volume.py");
+}
 int main(int argc, char *argv[])
 {
     QApplication dash(argc, argv);
