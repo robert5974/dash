@@ -8,6 +8,25 @@
 #include "canbus/elm327.hpp"
 #include "plugins/vehicle_plugin.hpp"
 
+#include <QDebug>
+#include <QPainter>
+#include <QColor>
+#include <QSizeF>
+#include <QRectF>
+#include <QVariantAnimation>
+#include <QPropertyAnimation>
+#include <QSequentialAnimationGroup>
+#include <QFontInfo>
+#include <QFontMetrics>
+#include <QMarginsF>
+
+#include "app/graphics/RoundGaugeGraphicsObject.hpp"
+
+//This modified version of the Gauge class uses a RoundGaugeGraphicsObject object to 
+//display the data from the CAN bus instead of using labels. 
+//The can_callback function updates the value of the round gauge by calling the setValue function,
+// and the format_value and null_value functions are no longer needed.
+
 Gauge::Gauge(units_t units, QFont value_font, QFont unit_font, Gauge::Orientation orientation, int rate,
              std::vector<Command> cmds, int precision, obd_decoder_t decoder, QWidget *parent)
 : QWidget(parent)
@@ -50,13 +69,15 @@ Gauge::Gauge(units_t units, QFont value_font, QFont unit_font, Gauge::Orientatio
     else
         layout = new QHBoxLayout(this);
 
-    value_label = new QLabel(this->null_value(), this);
-    value_label->setFont(value_font);
-    value_label->setAlignment(Qt::AlignCenter);
+    // Create a round gauge object and set its range and units
+    mRoundGauge = new RoundGaugeGraphicsObject(QRectF(0, 0, 100, 100), this);
+    mRoundGauge->setRange(0, 200);
+    mRoundGauge->setUnits(units.first, units.second);
 
-    QLabel *unit_label = new QLabel(this->si ? units.second : units.first, this);
-    unit_label->setFont(unit_font);
-    unit_label->setAlignment(Qt::AlignCenter);
+    // Add the round gauge to the layout
+    layout->addStretch(6);
+    layout->addWidget(mRoundGauge);
+    layout->addStretch(1);
 
     this->timer = new QTimer(this);
     connect(this->timer, &QTimer::timeout, [this, bus, cmds]() {
@@ -67,22 +88,17 @@ Gauge::Gauge(units_t units, QFont value_font, QFont unit_font, Gauge::Orientatio
 
     connect(config, &Config::si_units_changed, [this, units, unit_label](bool si) {
         this->si = si;
-        unit_label->setText(this->si ? units.second : units.first);
-        value_label->setText(this->null_value());
+        mRoundGauge->setUnits(units.first, units.second);
+        mRoundGauge->setValue(0);
     });
-
-    layout->addStretch(6);
-    layout->addWidget(value_label);
-    layout->addStretch(1);
-    layout->addWidget(unit_label);
-    layout->addStretch(4);
 }
 
 void Gauge::can_callback(QByteArray payload){
     Response resp = Response(payload);
     for(auto cmd : cmds){
         if(cmd.frame.payload().at(2) == resp.PID){
-            value_label->setText(this->format_value(this->decoder(cmd.decoder(resp), this->si)));
+            double value = this->decoder(cmd.decoder(resp), this->si);
+            mRoundGauge->setValue(value);
         }
     }
 }
@@ -97,13 +113,10 @@ QString Gauge::format_value(double value)
 
 QString Gauge::null_value()
 {
-    QString null_str = "-";
-    if (this->precision > 0)
-        null_str += ".-";
-    else
-        null_str += '-';
-
-    return null_str;
+    QString null_str;
+    for (int i = 0; i < this->precision; i++)
+            null_str.append("-");
+        return null_str;
 }
 
 VehiclePage::VehiclePage(Arbiter &arbiter, QWidget *parent)
