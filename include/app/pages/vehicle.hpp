@@ -13,6 +13,20 @@
 
 #include "app/pages/page.hpp"
 
+#include "roundgaugegraphicsobject.h"
+
+#include <QGraphicsObject>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QGraphicsLinearLayout>
+#include <QGraphicsProxyWidget>
+#include <QLabel>
+#include <QPropertyAnimation>
+#include <QGraphicsBlurEffect>
+
+
 class Arbiter;
 
 typedef std::function<double(double, bool)> obd_decoder_t;
@@ -48,7 +62,7 @@ class Gauge : public QWidget {
     void toggle_unit(bool si);
 };
 
-class VehiclePage : public QTabWidget, public Page {
+class VehiclePage : public QGraphicsView, public Page {
     Q_OBJECT
 
    public:
@@ -81,12 +95,16 @@ class DataTab : public QWidget {
 
    private:
     Arbiter &arbiter;
-    QWidget *speedo_tach_widget();
+    //QWidget *speedo_tach_widget();
     // QWidget *mileage_data_widget();
-    QWidget *engine_data_widget();
+    //QWidget *engine_data_widget();
     QWidget *coolant_temp_widget();
-    QWidget *engine_load_widget();
+    //QWidget *engine_load_widget();
+    RoundGaugeGraphicsObject* speedoGauge;
+    RoundGaugeGraphicsObject* tachGauge;
+    QGraphicsLinearLayout* layout;
+    QGraphicsScene* scene;
+    QGraphicsBlurEffect* blur;
 
     std::vector<Gauge *> gauges;
 };
-
