@@ -1,8 +1,20 @@
 #include <QPalette>
 #include <QSerialPortInfo>
+#include <QDebug>
+#include <QPainter>
+#include <QColor>
+#include <QSizeF>
+#include <QRectF>
+#include <QVariantAnimation>
+#include <QPropertyAnimation>
+#include <QSequentialAnimationGroup>
+#include <QFontInfo>
+#include <QFontMetrics>
+#include <QMarginsF>
 
 #include "app/config.hpp"
 #include "app/pages/vehicle.hpp"
+#include "app/graphics/roundgaugegraphicsobject.hpp"
 #include "app/window.hpp"
 #include "obd/conversions.hpp"
 #include "canbus/elm327.hpp"
