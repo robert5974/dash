@@ -362,8 +362,7 @@ DataTab::DataTab(Arbiter &arbiter, QWidget *parent)
     for (auto &gauge : this->gauges)
         gauge->start();
 }
-
-QWidget *DataTab::speedo_tach_widget()
+QWidget* DataTab::speedo_tach_widget();
 {
     QWidget *widget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(widget);
@@ -433,7 +432,7 @@ QWidget *DataTab::speedo_tach_widget()
 //     return widget;
 // }
 
-QWidget *DataTab::engine_data_widget()
+QWidget* DataTab::engine_data_widget();
 {
     QWidget *widget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(widget);
@@ -451,7 +450,7 @@ QWidget *DataTab::engine_data_widget()
     return widget;
 }
 
-QWidget *DataTab::coolant_temp_widget()
+QWidget* DataTab::coolant_temp_widget();
 {
     QWidget *widget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(widget);
@@ -481,7 +480,7 @@ QWidget *DataTab::coolant_temp_widget()
     return widget;
 }
 
-QWidget *DataTab::engine_load_widget()
+QWidget* DataTab::engine_load_widget();
 {
     QWidget *widget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(widget);
