@@ -13,7 +13,7 @@
 
 #include "app/pages/page.hpp"
 
-#include "roundgaugegraphicsobject.h"
+#include "app/graphics/roundgaugegraphicsobject.hpp"
 
 #include <QGraphicsObject>
 #include <QGraphicsView>
