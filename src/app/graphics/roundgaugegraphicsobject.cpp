@@ -10,7 +10,7 @@
 #include <QFontMetrics>
 #include <QMarginsF>
 
-#include "RoundGaugeGraphicsObject.h"
+#include "app/graphics/roundgaugegraphicsobject.hpp"
 
 RoundGaugeGraphicsObject::RoundGaugeGraphicsObject(const QRectF &rect, QGraphicsItem *parent) :
     QGraphicsObject(parent),
