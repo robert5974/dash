@@ -20,7 +20,7 @@
 #include <QFontMetrics>
 #include <QMarginsF>
 
-#include "app/graphics/RoundGaugeGraphicsObject.hpp"
+#include "app/graphics/roundgaugegraphicsobject.hpp"
 
 //This modified version of the Gauge class uses a RoundGaugeGraphicsObject object to 
 //display the data from the CAN bus instead of using labels. 
