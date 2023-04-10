@@ -1,6 +1,6 @@
-// circular_gauge_plugin.cpp
+// circulargauges.cpp
 
-#include "circular_gauge_plugin.hpp"
+#include "circulargauges.hpp"
 
 CircularGauge::CircularGauge(QWidget* parent)
     : QWidget(parent)
