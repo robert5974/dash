@@ -1,4 +1,4 @@
-// circular_gauge_plugin.hpp
+// circulargauges.hpp
 
 #pragma once
 
