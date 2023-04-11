@@ -3,7 +3,7 @@
 #pragma once
 
 #include <QObject>
-#include <QtPlugin>
+//#include <QtPlugin>
 #include <canbus/ICANBus.hpp>
 #include <QVBoxLayout>
 #include <QLabel>
