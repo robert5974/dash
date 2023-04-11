@@ -57,5 +57,5 @@ bool CircularGaugePlugin::init(ICANBus* canBus)
 }
 
 // Export the plugin to the Qt plugin system
-Q_EXPORT_PLUGIN2(circular_gauge_plugin, CircularGaugePlugin)
+//Q_EXPORT_PLUGIN2(circular_gauge_plugin, CircularGaugePlugin)
 
