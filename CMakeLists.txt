@@ -91,16 +91,16 @@ target_include_directories(dash PRIVATE
     )
 
 target_include_directories(dash SYSTEM PRIVATE
-    ${Qt5Svg_INCLUDE_DIRS}
-    ${Qt5Xml_INCLUDE_DIRS}
-    ${Qt5WebSockets_INCLUDE_DIRS}
-    ${Qt5DBus_INCLUDE_DIRS}
-    ${Qt5SerialBus_INCLUDE_DIRS}
-    ${Qt5SerialPort_INCLUDE_DIRS}
-    ${Qt5Multimedia_INCLUDE_DIRS}
-    ${Qt5MultimediaWidgets_INCLUDE_DIRS}
-    ${Qt5Widgets_INCLUDE_DIRS}
-    ${Qt5Bluetooth_INCLUDE_DIRS}
+    ${Qt6Svg_INCLUDE_DIRS}
+    ${Qt6Xml_INCLUDE_DIRS}
+    ${Qt6WebSockets_INCLUDE_DIRS}
+    ${Qt6DBus_INCLUDE_DIRS}
+    ${Qt6SerialBus_INCLUDE_DIRS}
+    ${Qt6SerialPort_INCLUDE_DIRS}
+    ${Qt6Multimedia_INCLUDE_DIRS}
+    ${Qt6MultimediaWidgets_INCLUDE_DIRS}
+    ${Qt6Widgets_INCLUDE_DIRS}
+    ${Qt6Bluetooth_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
     ${LIBUSB_1_INCLUDE_DIRS}
     ${PROTOBUF_INCLUDE_DIR}
@@ -122,16 +122,16 @@ target_link_libraries(dash
     aasdk
     openauto
     ${Boost_LIBRARIES}
-    ${Qt5Svg_LIBRARIES}
-    ${Qt5Xml_LIBRARIES}
-    ${Qt5DBus_LIBRARIES}
-    ${Qt5WebSockets_LIBRARIES}
-    ${Qt5SerialBus_LIBRARIES}
-    ${Qt5SerialPort_LIBRARIES}
-    ${Qt5Multimedia_LIBRARIES}
-    ${Qt5MultimediaWidgets_LIBRARIES}
-    ${Qt5Bluetooth_LIBRARIES}
-    KF5::BluezQt
+    ${Qt6Svg_LIBRARIES}
+    ${Qt6Xml_LIBRARIES}
+    ${Qt6DBus_LIBRARIES}
+    ${Qt6WebSockets_LIBRARIES}
+    ${Qt6SerialBus_LIBRARIES}
+    ${Qt6SerialPort_LIBRARIES}
+    ${Qt6Multimedia_LIBRARIES}
+    ${Qt6MultimediaWidgets_LIBRARIES}
+    ${Qt6Bluetooth_LIBRARIES}
+    KF6::BluezQt
     ${LIBUSB_1_LIBRARIES}
     ${PROTOBUF_LIBRARIES}
     ${BCM_HOST_LIBRARIES}
