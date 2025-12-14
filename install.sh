@@ -155,8 +155,8 @@ installArgs="-DCMAKE_BUILD_TYPE=${BUILD_TYPE} $installArgs"
 "qt6-multimedia-dev"
 "libqt6multimedia6"
 "libqt6multimediawidgets6"
-"qt6-connectivity-dev"
 "libqt6bluetooth6"
+"qt6-connectivity-dev"
 "pulseaudio"
 "pulseaudio-module-bluetooth"
 "librtaudio-dev"
@@ -183,7 +183,6 @@ installArgs="-DCMAKE_BUILD_TYPE=${BUILD_TYPE} $installArgs"
 "libtool"
 "autoconf"
 "ffmpeg"
-)
 
 
 ###############################  dependencies  #########################
@@ -497,7 +496,7 @@ if [ $gstreamer = true ]; then
 
   #run cmake
   echo Beginning cmake
-  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) -DCMAKE_INSTALL_INCLUDEDIR=include -DQT_VERSION=5 -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-std=c++11
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_INSTALL_LIBDIR=lib/$(dpkg-architecture -qDEB_HOST_MULTIARCH) -DCMAKE_INSTALL_INCLUDEDIR=include -DQT_VERSION=6 -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS=-std=c++17
 
   if [[ $? -eq 0 ]]; then
     echo -e Make ok'\n'
@@ -553,9 +552,9 @@ else
   else
     cd openauto
     if [[ $? -eq 0 ]]; then
-      git pull $openautoRepo
-      echo -e Openauto cloned OK'\n'
-      cd ..
+      # git pull $openautoRepo
+      # echo -e Openauto cloned OK'\n'
+      # cd ..
     else
       echo Openauto clone/pull error
       exit 1
@@ -577,7 +576,7 @@ else
   cd build
 
   echo Beginning openauto cmake
-  cmake ${installArgs} -DGST_BUILD=true ../
+  cmake ${installArgs} -DGST_BUILD=true --debug-find-pkg=Qt6Bluetooth ../
   if [[ $? -eq 0 ]]; then
     echo -e Openauto CMake OK'\n'
   else
