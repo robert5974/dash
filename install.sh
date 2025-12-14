@@ -552,9 +552,8 @@ else
   else
     cd openauto
     if [[ $? -eq 0 ]]; then
-      # git pull $openautoRepo
-      # echo -e Openauto cloned OK'\n'
-      # cd ..
+      echo -e Openauto directory exists, skipping pull'\n'
+      cd ..
     else
       echo Openauto clone/pull error
       exit 1
