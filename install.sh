@@ -575,6 +575,9 @@ else
   fi
 
   cd build
+  
+  # Patch IAndroidAutoInterface.hpp to remove extra argument in sendButtonPress (Qt6 migration fix)
+  sed -i 's/m_serviceFactory->sendButtonPress(buttonCode, wheelDirection, buttonEventType);/m_serviceFactory->sendButtonPress(buttonCode, wheelDirection);/g' ../include/openauto/Service/IAndroidAutoInterface.hpp
 
   echo Beginning openauto cmake
   cmake ${installArgs} -DGST_BUILD=true --debug-find-pkg=Qt6Bluetooth ../
