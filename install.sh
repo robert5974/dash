@@ -143,6 +143,7 @@ echo "Script directory is $script_path"
 installArgs="-DCMAKE_BUILD_TYPE=${BUILD_TYPE} $installArgs"
 
 #Array of dependencies any new dependencies can be added here
+dependencies=(
 "alsa-utils"
 "cmake"
 "libboost-all-dev"
@@ -183,6 +184,7 @@ installArgs="-DCMAKE_BUILD_TYPE=${BUILD_TYPE} $installArgs"
 "libtool"
 "autoconf"
 "ffmpeg"
+)
 
 
 ###############################  dependencies  #########################
