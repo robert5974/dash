@@ -1,4 +1,5 @@
 #include <BluezQt/PendingCall>
+#include <QAudioOutput>
 #include <QDirIterator>
 #include <QListWidget>
 #include <QListWidgetItem>
