@@ -161,7 +161,7 @@ dependencies=(
 "pulseaudio"
 "pulseaudio-module-bluetooth"
 "librtaudio-dev"
-"librtaudio6"
+"librtaudio7"
 "libkf6bluezqt-dev"
 "libtag1-dev"
 "qml6-module-qtquick"
