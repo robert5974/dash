@@ -60,7 +60,7 @@ void ActionDialog::keyPressEvent(QKeyEvent *event) {
                   [key](Qt::Key mod_key) { return (key == mod_key); }))
     return;
 
-  this->label->setText(QKeySequence(event->modifiers() + key).toString());
+  this->label->setText(QKeySequence(event->modifiers() | key).toString());
 }
 
 void ActionDialog::showEvent(QShowEvent *event) {
@@ -183,7 +183,7 @@ void Action::set(QString key) {
         QString debugStr;
         QDebug stream(&debugStr);
         stream << "[Action] " << this->key_ << ": failed to open"
-               << active_low; // temp
+               << active_low.fileName(); // temp
         DASH_LOG(info) << debugStr.toStdString();
       }
     } else {
