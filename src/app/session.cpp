@@ -14,6 +14,7 @@
 #include "app/arbiter.hpp"
 #include "app/pages/camera.hpp"
 #include "app/pages/vehicle.hpp"
+#include "app/pages/dashboard.hpp"
 #include "app/pages/launcher.hpp"
 #include "app/pages/media.hpp"
 #include "app/pages/settings.hpp"
@@ -118,6 +119,7 @@ Session::Layout::Layout(QSettings &settings, Arbiter &arbiter)
     , fullscreen(settings, arbiter)
 {
     this->pages_ = {
+        new DashboardPage(arbiter),
         this->openauto_page,
         new MediaPage(arbiter),
         new VehiclePage(arbiter),

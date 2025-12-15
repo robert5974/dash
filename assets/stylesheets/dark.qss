@@ -310,3 +310,38 @@ QDialog > QFrame {
     background-color: rgba(255, 255, 255, 31);
     border-radius: 8px;
 }
+
+/* Dashboard Cards */
+#DashboardNavCard {
+    background-color: #0F9D58; /* Google Green */
+    border-radius: 16px;
+    border: none;
+}
+#DashboardNavCard:pressed {
+    background-color: #0B8043;
+}
+
+#DashboardMediaCard {
+    background-color: #DB4437; /* Google Red */
+    border-radius: 16px;
+    border: none;
+}
+#DashboardMediaCard:pressed {
+    background-color: #C53929;
+}
+
+#DashboardPhoneCard {
+    background-color: #4285F4; /* Google Blue */
+    border-radius: 16px;
+    border: none;
+}
+#DashboardPhoneCard:pressed {
+    background-color: #3367D6;
+}
+
+/* Ensure icons in cards are white */
+#DashboardNavCard QLabel,
+#DashboardMediaCard QLabel,
+#DashboardPhoneCard QLabel {
+    background-color: transparent;
+}
