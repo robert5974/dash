@@ -298,11 +298,15 @@ LocalPlayerTab::LocalPlayerTab(Arbiter &arbiter, QWidget *parent)
     : QWidget(parent), arbiter(arbiter) {
   this->config = Config::get_instance();
 
-  QMediaPlaylist *playlist = new QMediaPlaylist(this);
-  playlist->setPlaybackMode(QMediaPlaylist::Loop);
-
   this->player = new QMediaPlayer(this);
-  this->player->setPlaylist(playlist);
+  this->player->setAudioOutput(new QAudioOutput(this));
+
+  connect(this->player, &QMediaPlayer::mediaStatusChanged,
+          [this](QMediaPlayer::MediaStatus status) {
+            if (status == QMediaPlayer::EndOfMedia) {
+              this->playlist_next();
+            }
+          });
 
   this->path_label = new QLabel(this->config->get_media_home(), this);
 
