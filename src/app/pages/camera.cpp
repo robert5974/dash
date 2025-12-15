@@ -385,7 +385,7 @@ QWidget *CameraPage::local_cam_selector() {
   connect(this, &CameraPage::prev_cam, [this, label] {
     this->local_index = (this->local_index - 1 + this->local_cams.size()) %
                         this->local_cams.size();
-    auto cam = this->local_cams.at(local_index);
+    auto cam = this->local_cams.at(this->local_index);
     label->setText(cam.first);
     this->config->set_cam_local_device(cam.second);
   });
@@ -395,7 +395,7 @@ QWidget *CameraPage::local_cam_selector() {
     label->setText(cam.first);
     this->config->set_cam_local_device(cam.second);
   });
-  label->setText(this->local_cams.at(local_index).first);
+  label->setText(this->local_cams.at(this->local_index).first);
   layout->addWidget(selector);
 
   QHBoxLayout *refresh_row = new QHBoxLayout();
@@ -409,7 +409,7 @@ QWidget *CameraPage::local_cam_selector() {
   layout->addLayout(refresh_row);
   connect(refresh_button, &QPushButton::clicked, this, [this, label] {
     this->populate_local_cams();
-    label->setText(this->local_cams.at(local_index).first);
+    label->setText(this->local_cams.at(this->local_index).first);
   });
 
   return widget;
@@ -638,10 +638,6 @@ gboolean CameraPage::busCallback(GstBus *, GstMessage *message, gpointer *) {
   case GST_MESSAGE_STATE_CHANGED:
   default:
     break;
-    const auto cameras = QMediaDevices::videoInputs();
-    for (const auto &cameraInfo : cameras) {
-      if (cameraInfo.id() == device)
-        return true;
-    }
-    return false;
   }
+  return TRUE;
+}
