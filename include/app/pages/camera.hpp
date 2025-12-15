@@ -4,12 +4,15 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLabel>
+#include <QList>
 #include <QMediaDevices>
 #include <QMediaPlayer>
+#include <QPair>
 #include <QRadioButton>
 #include <QStackedLayout>
 #include <QString>
 #include <QVideoWidget>
+#include <QWidget>
 
 #include <QGlib/Connect>
 #include <QGlib/Error>
@@ -101,6 +104,18 @@ private:
   GstAppSrc *vidSrc_;
   QWidget *videoContainer_;
   QGst::Quick::VideoSurface *surface_;
+
+  QMediaPlayer *player;
+  int local_index;
+  QTimer *reconnect_timer;
+  Config *config;
+  bool connected;
+  QLabel *status;
+  VideoContainer *local_video_widget;
+  VideoContainer *remote_video_widget;
+  int reconnect_in_secs;
+  QString reconnect_message;
+  QList<QPair<QString, QString>> local_cams;
 
 signals:
   void connected_network();
