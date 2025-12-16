@@ -53,11 +53,11 @@ Dash::Dash(Arbiter &arbiter)
     layout->addLayout(this->rail.layout);
     layout->addLayout(this->body.layout);
 
-    connect(&this->rail.group, QOverload<int>::of(&QButtonGroup::buttonPressed), [this](int id){
+    connect(&this->rail.group, [this](int id){
         this->arbiter.set_curr_page(id);
         this->rail.timer.start();
     });
-    connect(&this->rail.group, QOverload<int>::of(&QButtonGroup::buttonReleased), [this](int id){
+    connect(&this->rail.group, [this](int id){
         if (this->rail.timer.hasExpired(1000))
             this->arbiter.set_fullscreen(true);
     });
