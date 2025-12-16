@@ -7,4 +7,5 @@ class DashboardPage : public QWidget, public Page {
 
 public:
   DashboardPage(Arbiter &arbiter);
+  void init() override;
 };

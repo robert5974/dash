@@ -6,7 +6,6 @@
 #include "app/pages/dashboard.hpp"
 #include "app/utilities/icon_engine.hpp"
 
-
 DashboardPage::DashboardPage(Arbiter &arbiter)
     : Page(arbiter, "Dashboard", "widgets", true, new QWidget()) {
   auto layout = new QHBoxLayout(this->container()->content());
@@ -82,3 +81,5 @@ DashboardPage::DashboardPage(Arbiter &arbiter)
     this->arbiter.set_curr_page(1); // OpenAuto (Phone)
   });
 }
+
+void DashboardPage::init() {}
