@@ -356,6 +356,41 @@ QPushButton *CameraPage::connect_button() {
   return connect_button;
 }
 
+bool CameraPage::local_cam_available(const QString &device) {
+  const auto cameras = QMediaDevices::videoInputs();
+  for (const auto &cam : cameras) {
+    if (cam.id() == device)
+      return true;
+  }
+  return false;
+}
+
+QSize CameraPage::choose_video_resolution() {
+  QCameraDevice device;
+  const auto cameras = QMediaDevices::videoInputs();
+  const QString &local = this->config->get_cam_local_device();
+
+  for (const auto &cam : cameras) {
+    if (cam.id() == local) {
+      device = cam;
+      break;
+    }
+  }
+
+  if (device.isNull())
+    return QSize(640, 480);
+
+  // Try to find a resolution close to 720p or similar, or just return the first
+  // one For simplicity in this migration, let's grab the first non-empty
+  // resolution or 640x480
+  const auto resolutions = device.videoFormats();
+  if (!resolutions.isEmpty()) {
+    return resolutions.first().resolution();
+  }
+
+  return QSize(640, 480);
+}
+
 void CameraPage::count_down() {
   this->reconnect_in_secs--;
   this->status->setText(
