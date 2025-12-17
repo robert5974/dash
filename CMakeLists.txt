@@ -51,6 +51,8 @@ if(RPI_BUILD AND NOT GST_BUILD)
     set(ILCLIENT_LIBRARIES "/opt/vc/src/hello_pi/libs/ilclient/libilclient.a;/opt/vc/lib/libvcos.so;/opt/vc/lib/libvcilcs.a;/opt/vc/lib/libvchiq_arm.so")
 endif(RPI_BUILD AND NOT GST_BUILD)
 if(GST_BUILD)
+    message(STATUS "Setting QT_INCLUDE_DIR to bypass broken Qt6GStreamer check")
+    set(QT_INCLUDE_DIR ${Qt6Core_INCLUDE_DIRS})
     find_package(Qt6GStreamer)
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(GST REQUIRED
