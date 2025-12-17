@@ -41,11 +41,11 @@ Dash::Dash(Arbiter &arbiter) : QWidget(), arbiter(arbiter), rail(), body() {
   layout->addLayout(this->rail.layout);
   layout->addLayout(this->body.layout);
 
-  connect(&this->rail.group, &QButtonGroup::idPressed, [this](<int id>) {
+  connect(&this->rail.group, &QButtonGroup::idPressed, [this](int id) {
     this->arbiter.set_curr_page(id);
     this->rail.timer.start();
   });
-  connect(&this->rail.group, &QButtonGroup::idReleased, [this](<int id>) {
+  connect(&this->rail.group, &QButtonGroup::idReleased, [this](int id) {
     if (this->rail.timer.hasExpired(1000))
       this->arbiter.set_fullscreen(true);
   });
