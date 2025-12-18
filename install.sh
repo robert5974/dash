@@ -621,6 +621,7 @@ else
 
   #create build directory
   echo Creating dash build directory
+  rm -rf build
   mkdir build
 
   if [[ $? -eq 0 ]]; then
