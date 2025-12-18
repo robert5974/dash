@@ -120,7 +120,7 @@ target_include_directories(dash SYSTEM PRIVATE
     )
 
 target_link_libraries(dash
-    aasdk_proto
+
     aasdk
     openauto
     ${Boost_LIBRARIES}
