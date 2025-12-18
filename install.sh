@@ -358,7 +358,7 @@ else
   fi
 
   #begin make install
-  sudo make install
+  # sudo make install
 
   if [[ $? -eq 0 ]]
     then
@@ -429,7 +429,7 @@ else
   fi
 
   #begin make install
-  sudo make install
+  # sudo make install
 
   if [[ $? -eq 0 ]]
     then
@@ -600,7 +600,7 @@ else
 
   #run make install
   echo Beginning make install
-  sudo make install
+  # sudo make install
   if [[ $? -eq 0 ]]; then
     echo -e Openauto installed ok'\n'
   else
