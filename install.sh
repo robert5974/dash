@@ -326,8 +326,15 @@ else
   echo Apply set_FIPS_mode patch
   git apply $script_path/patches/aasdk_openssl-fips-fix.patch
 
+  # Ensure we are on develop branch and have correct submodules
+  git checkout develop
+  git submodule update --init --recursive
+  # Remove duplicate/phantom proto file if it exists
+  rm -f aasdk_proto/MediaChannelData.proto
+
   #create build directory
   echo Creating aasdk build directory
+  rm -rf build
   mkdir build
 
   if [[ $? -eq 0 ]]; then
