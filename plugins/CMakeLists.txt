@@ -46,7 +46,6 @@ FOREACH(plugin_type ${plugin_types})
             ${include_directory}
         )
         target_link_libraries(${plugin}
-            aasdk_proto
             aasdk
             openauto
             ${Qt6DBus_LIBRARIES}
