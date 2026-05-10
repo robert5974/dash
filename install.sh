@@ -184,6 +184,8 @@ dependencies=(
 "libtool"
 "autoconf"
 "ffmpeg"
+"gstreamer1.0-qt6"
+"libqt6waylandclient6"
 )
 
 
