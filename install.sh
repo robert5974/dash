@@ -132,7 +132,7 @@ else
     ofono=false
     if [ $isRpi = true ]; then
       pulseaudio=true
-      bluez=true
+      bluez=false # Disabled to prevent overwriting the OS-provided BlueZ and breaking D-Bus
       ofono=false # Skip Ofono due to issue with Bluetooth HSP
     fi
 fi
