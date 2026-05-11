@@ -21,6 +21,18 @@ class Config : public QObject {
   Q_OBJECT
 
 public:
+  enum class DistanceUnit {
+      Miles,
+      Kilometers
+  };
+  Q_ENUM(DistanceUnit)
+
+  enum class TemperatureUnit {
+      Fahrenheit,
+      Celsius
+  };
+  Q_ENUM(TemperatureUnit)
+
   std::shared_ptr<openauto::configuration::Configuration> openauto_config;
   openauto::configuration::Configuration::ButtonCodes openauto_button_codes;
 
@@ -58,6 +70,24 @@ public:
     this->si_units = si_units;
     this->settings.setValue("Pages/Vehicle/si_units", this->si_units);
     emit si_units_changed(this->si_units);
+    
+    // Update granular settings to match
+    this->set_distance_unit(si_units ? DistanceUnit::Kilometers : DistanceUnit::Miles);
+    this->set_temperature_unit(si_units ? TemperatureUnit::Celsius : TemperatureUnit::Fahrenheit);
+  }
+
+  inline DistanceUnit get_distance_unit() { return this->distance_unit; }
+  inline void set_distance_unit(DistanceUnit unit) {
+    this->distance_unit = unit;
+    this->settings.setValue("Pages/Vehicle/distance_unit", (int)this->distance_unit);
+    emit distance_unit_changed(this->distance_unit);
+  }
+
+  inline TemperatureUnit get_temperature_unit() { return this->temperature_unit; }
+  inline void set_temperature_unit(TemperatureUnit unit) {
+    this->temperature_unit = unit;
+    this->settings.setValue("Pages/Vehicle/temperature_unit", (int)this->temperature_unit);
+    emit temperature_unit_changed(this->temperature_unit);
   }
 
   inline ICANBus::VehicleBusType get_vehicle_can_bus() {
@@ -188,6 +218,8 @@ private:
   QString radio_plugin;
   QString media_home;
   bool si_units;
+  DistanceUnit distance_unit;
+  TemperatureUnit temperature_unit;
   ICANBus::VehicleBusType vehicle_can_bus;
   QString vehicle_interface;
   QString vehicle_plugin;
@@ -205,6 +237,8 @@ private:
 
 signals:
   void si_units_changed(bool si_units);
+  void distance_unit_changed(DistanceUnit unit);
+  void temperature_unit_changed(TemperatureUnit unit);
   void cam_autoconnect_changed(bool enabled);
   void cam_overlay_changed(bool enabled);
   void vehicle_can_bus_changed(ICANBus::VehicleBusType state);

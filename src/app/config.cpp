@@ -19,6 +19,19 @@ Config::Config()
           .toString();
   this->si_units =
       this->settings.value("Pages/Vehicle/si_units", false).toBool();
+
+  int default_dist =
+      this->si_units ? (int)DistanceUnit::Kilometers : (int)DistanceUnit::Miles;
+  int default_temp = this->si_units ? (int)TemperatureUnit::Celsius
+                                    : (int)TemperatureUnit::Fahrenheit;
+
+  this->distance_unit = (DistanceUnit)this->settings
+                            .value("Pages/Vehicle/distance_unit", default_dist)
+                            .toInt();
+  this->temperature_unit =
+      (TemperatureUnit)this->settings
+          .value("Pages/Vehicle/temperature_unit", default_temp)
+          .toInt();
   // 0 - SocketCAN
   // 1 - Elm 327 USB
   // 2 - Elm 327 Bluetooth
