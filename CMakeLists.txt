@@ -51,9 +51,7 @@ if(RPI_BUILD AND NOT GST_BUILD)
     set(ILCLIENT_LIBRARIES "/opt/vc/src/hello_pi/libs/ilclient/libilclient.a;/opt/vc/lib/libvcos.so;/opt/vc/lib/libvcilcs.a;/opt/vc/lib/libvchiq_arm.so")
 endif(RPI_BUILD AND NOT GST_BUILD)
 if(GST_BUILD)
-    message(STATUS "Setting QT_INCLUDE_DIR to bypass broken Qt6GStreamer check")
-    set(QT_INCLUDE_DIR ${Qt6Core_INCLUDE_DIRS})
-    find_package(Qt6GStreamer)
+    message(STATUS "Configuring GStreamer for Dash")
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(GST REQUIRED
         gstreamer-1.0>=1.4
@@ -114,7 +112,6 @@ target_include_directories(dash SYSTEM PRIVATE
     ${BCM_HOST_INCLUDE_DIRS}
     ${ILCLIENT_INCLUDE_DIRS}
     ${GST_INCLUDE_DIRS}
-    ${QTGSTREAMER_INCLUDE_DIR}
     ${TAGLIB_INCLUDE_DIRS}
     ${include_directory}
     )
@@ -141,15 +138,7 @@ target_link_libraries(dash
     ${WINSOCK2_LIBRARIES}
     ${RTAUDIO_LIBRARIES}
     ${GST_LIBRARIES}
-    ${QTGLIB_LIBRARY}
-    ${QTGLIB_LIBRARIES}
-    ${QTGSTREAMER_LIBRARY}
-    ${QTGSTREAMER_LIBRARIES}
-    ${QTGSTREAMER_UI_LIBRARY}
-    ${QTGSTREAMER_UI_LIBRARIES}
     ${Qt6QuickWidgets_LIBRARIES}
-    ${QTGSTREAMER_QUICK_LIBRARIES}
-    ${QTGSTREAMER_QUICK_LIBRARY}
     ${TAGLIB_LIBRARIES}
     )
 

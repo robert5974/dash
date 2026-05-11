@@ -14,18 +14,7 @@
 #include <QVideoWidget>
 #include <QWidget>
 
-#include <QGlib/Connect>
-#include <QGlib/Error>
-#include <QGst/Bus>
-#include <QGst/ElementFactory>
-#include <QGst/Init>
-#include <QGst/Message>
-#include <QGst/Parse>
-#include <QGst/Pipeline>
-#include <QGst/Quick/VideoSurface>
-#include <QGst/Ui/VideoWidget>
-#include <QGst/Utils/ApplicationSink>
-#include <QGst/Utils/ApplicationSource>
+
 #include <QtQml/QQmlContext>
 #include <QtQuickWidgets/QQuickWidget>
 #include <gst/app/gstappsink.h>
@@ -98,12 +87,10 @@ private:
   static gboolean busCallback(GstBus *, GstMessage *message, gpointer *);
   void showEvent(QShowEvent *event);
 
-  QGst::ElementPtr videoSink_;
   QQuickWidget *videoWidget_;
   GstElement *vidPipeline_;
   GstAppSrc *vidSrc_;
   QWidget *videoContainer_;
-  QGst::Quick::VideoSurface *surface_;
 
   QMediaPlayer *player;
   int local_index;

@@ -60,13 +60,8 @@ void CameraPage::showEvent(QShowEvent *event) {
 void CameraPage::init_gstreamer_pipeline(std::string desc, bool sync) {
   videoWidget_ = new QQuickWidget(videoContainer_);
 
-  surface_ = new QGst::Quick::VideoSurface;
-  videoWidget_->rootContext()->setContextProperty(QLatin1String("videoSurface"),
-                                                  surface_);
   videoWidget_->setSource(QUrl("qrc:/camera_video.qml"));
   videoWidget_->setResizeMode(QQuickWidget::SizeRootObjectToView);
-
-  videoSink_ = surface_->videoSink();
 
   GError *error = nullptr;
   std::string pipeline = desc;
@@ -83,7 +78,7 @@ void CameraPage::init_gstreamer_pipeline(std::string desc, bool sync) {
         " x-relative=" + std::to_string(x) + " y-relative=" + std::to_string(y);
   }
   pipeline = pipeline + " ! videoconvert " +
-             " ! capsfilter caps=video/x-raw name=mycapsfilter";
+             " ! capsfilter caps=video/x-raw name=mycapsfilter ! glupload ! qml6glsink name=mysink sync=" + (sync ? "true" : "false") + " async=false";
   DASH_LOG(info) << "[CameraPage] Created GStreamer Pipeline of `" << pipeline
                  << "`";
   vidPipeline_ = gst_parse_launch(pipeline.c_str(), &error);
@@ -91,16 +86,15 @@ void CameraPage::init_gstreamer_pipeline(std::string desc, bool sync) {
   gst_bus_add_watch(bus, (GstBusFunc)&CameraPage::busCallback, this);
   gst_object_unref(bus);
 
-  GstElement *sink = QGlib::RefPointer<QGst::Element>(videoSink_);
+  GstElement *sink = gst_bin_get_by_name(GST_BIN(vidPipeline_), "mysink");
+  QQuickItem *videoItem = videoWidget_->rootObject()->findChild<QQuickItem*>("videoItem");
+  if (videoItem) {
+    g_object_set(sink, "widget", videoItem, nullptr);
+  } else {
+    DASH_LOG(error) << "[CameraPage] Failed to find QQuickItem 'videoItem'";
+  }
   g_object_set(sink, "force-aspect-ratio", false, nullptr);
-  g_object_set(sink, "sync", sync, nullptr);
-
-  g_object_set(sink, "async", false, nullptr);
-
-  GstElement *capsFilter =
-      gst_bin_get_by_name(GST_BIN(vidPipeline_), "mycapsfilter");
-  gst_bin_add(GST_BIN(vidPipeline_), GST_ELEMENT(sink));
-  gst_element_link(capsFilter, GST_ELEMENT(sink));
+  gst_object_unref(sink);
 }
 
 QWidget *CameraPage::connect_widget() {
