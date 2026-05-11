@@ -47,23 +47,23 @@ DashboardPage::DashboardPage(Arbiter &arbiter)
 
   layout->addWidget(media_card);
 
-  auto phone_card = new QPushButton();
-  phone_card->setObjectName("DashboardPhoneCard");
-  phone_card->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  auto settings_card = new QPushButton();
+  settings_card->setObjectName("DashboardSettingsCard");
+  settings_card->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-  // Icon for Phone Card
-  auto phone_layout = new QVBoxLayout(phone_card);
-  auto phone_icon = new QLabel();
-  phone_icon->setPixmap(
-      QIcon(":/icons/call.svg")
-          .pixmap(64, 64)); // Assuming call.svg exists or use similar
-  phone_icon->setAlignment(Qt::AlignCenter);
-  phone_icon->setAttribute(Qt::WA_TransparentForMouseEvents);
-  phone_layout->addStretch();
-  phone_layout->addWidget(phone_icon);
-  phone_layout->addStretch();
+  // Icon for Settings Card
+  auto settings_layout = new QVBoxLayout(settings_card);
+  auto settings_icon = new QLabel();
+  settings_icon->setPixmap(
+      QIcon(":/icons/tune.svg")
+          .pixmap(64, 64)); 
+  settings_icon->setAlignment(Qt::AlignCenter);
+  settings_icon->setAttribute(Qt::WA_TransparentForMouseEvents);
+  settings_layout->addStretch();
+  settings_layout->addWidget(settings_icon);
+  settings_layout->addStretch();
 
-  layout->addWidget(phone_card);
+  layout->addWidget(settings_card);
 
   // Connections
   // Navigation -> OpenAuto Page
@@ -76,9 +76,9 @@ DashboardPage::DashboardPage(Arbiter &arbiter)
     this->arbiter.set_curr_page(2); // Media
   });
 
-  // Phone -> OpenAuto Phone
-  connect(phone_card, &QPushButton::clicked, [this] {
-    this->arbiter.set_curr_page(1); // OpenAuto (Phone)
+  // Settings -> Settings Page
+  connect(settings_card, &QPushButton::clicked, [this] {
+    this->arbiter.set_curr_page(6); // Settings
   });
 }
 
