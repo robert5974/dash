@@ -65,7 +65,6 @@ private:
   void load_plugin();
   QWidget *dialog_body();
   QWidget *can_bus_toggle_row();
-  QWidget *can_bus_toggle_row();
   QWidget *distance_unit_row_widget();
   QWidget *temperature_unit_row_widget();
 

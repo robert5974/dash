@@ -2,6 +2,7 @@
 #include <QLineEdit>
 #include <QMediaDevices>
 #include <QTimer>
+#include <QQuickItem>
 
 #include "app/arbiter.hpp"
 #include "app/session.hpp"
