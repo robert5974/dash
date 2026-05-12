@@ -54,9 +54,7 @@ DashboardPage::DashboardPage(Arbiter &arbiter)
   // Icon for Settings Card
   auto settings_layout = new QVBoxLayout(settings_card);
   auto settings_icon = new QLabel();
-  settings_icon->setPixmap(
-      QIcon(":/icons/tune.svg")
-          .pixmap(64, 64)); 
+  settings_icon->setPixmap(QIcon(":/icons/tune.svg").pixmap(64, 64));
   settings_icon->setAlignment(Qt::AlignCenter);
   settings_icon->setAttribute(Qt::WA_TransparentForMouseEvents);
   settings_layout->addStretch();

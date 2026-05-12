@@ -8,7 +8,6 @@
 #include "obd/conversions.hpp"
 #include "plugins/vehicle_plugin.hpp"
 
-
 Gauge::Gauge(UnitType unit_type, units_t units, QFont value_font,
              QFont unit_font, Gauge::Orientation orientation, int rate,
              std::vector<Command> cmds, int precision, obd_decoder_t decoder,
